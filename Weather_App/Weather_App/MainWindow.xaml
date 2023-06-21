@@ -1,0 +1,106 @@
+﻿<Window x:Class="Weather_App.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Weather_App"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="1050" ResizeMode="NoResize" WindowStyle="None" MouseDown="Drag">
+    <Window.Resources>
+        <SolidColorBrush x:Key="TextBox.Static.Border" Color="#FFABAdB3"/>
+        <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#FF7EB4EA"/>
+        <SolidColorBrush x:Key="TextBox.Focus.Border" Color="#FF569DE5"/>
+        <Style x:Key="TextBoxStyle1" TargetType="{x:Type TextBox}">
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource TextBox.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="AllowDrop" Value="true"/>
+            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="10" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                            <ScrollViewer x:Name="PART_ContentHost"  Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.MouseOver.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.Focus.Border}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true"/>
+                        <Condition Property="IsSelectionActive" Value="false"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
+                </MultiTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Image HorizontalAlignment="Left" Height="612" VerticalAlignment="Top" Width="1083" Source="forest.jpg" Margin="0,0,-33,-12" Opacity="1" x:Name="def"/>
+        <Image HorizontalAlignment="Left" Height="612" VerticalAlignment="Top" Width="1083" Source="zakat.png" Margin="0,0,-33,-12" Opacity="0" x:Name="ccloud"/>
+        <Image HorizontalAlignment="Left" Height="612" VerticalAlignment="Top" Width="1083" Source="rain.jpg" Margin="0,0,-33,-12" Opacity="0" x:Name="rrain"/>
+        <Image HorizontalAlignment="Left" Height="612" VerticalAlignment="Top" Width="1083" Source="groz.jpg" Margin="0,0,-33,-12" Opacity="0" x:Name="ggroz"/>
+        <Image HorizontalAlignment="Left" Height="612" VerticalAlignment="Top" Width="1083" Source="sunnny.jpg" Margin="0,0,-33,-12" Opacity="0" x:Name="ssun"/>
+        
+        <Rectangle Fill="#454545" HorizontalAlignment="Left" Height="612" Margin="0,0,0,-12" Stroke="Transparent" VerticalAlignment="Top" Width="1050" Opacity="0.4"/>
+        <Rectangle Fill="#FFFFFF" HorizontalAlignment="Left" Height="35
+                   " Stroke="Transparent" VerticalAlignment="Top" Width="1050" Opacity="0.5"></Rectangle>
+
+        <Rectangle Fill="#6B6565" HorizontalAlignment="Left" Height="163" Margin="0,437,0,0" Stroke="Transparent" VerticalAlignment="Top" Width="1050" Opacity="0.3"/>
+        <TextBox HorizontalAlignment="Left" Height="25" Margin="810,65,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150" Background="#D9D9D9" Opacity="0.1" SelectionBrush="Transparent" SpellCheck.IsEnabled="True" Style="{DynamicResource TextBoxStyle1}"/>
+        <TextBox HorizontalAlignment="Left" x:Name="city" Height="25" Margin="810,65,0,0" TextWrapping="Wrap" Text="Chisinau" VerticalAlignment="Top" Width="150" Background="Transparent" Opacity="1"  
+                 BorderBrush="#FFFFFF" SpellCheck.IsEnabled="True" Style="{DynamicResource TextBoxStyle1}"
+                 HorizontalContentAlignment="Left" VerticalContentAlignment="Center" FontSize="15" Foreground="#FFFFFF" FontFamily="Inter" SelectionBrush="Transparent"/>
+        <Button Height="25" Width="25" Background="Transparent" BorderBrush="Transparent" Click="search_click" Margin="965,65,48,510">
+            <Image Source="search.png"/>
+        </Button>
+
+        <TextBox x:Name="City" HorizontalContentAlignment="Center" Text="Chisinau" HorizontalAlignment="Left" Margin="22,40,0,0" VerticalAlignment="Top" Foreground="White" FontSize="60" FontFamily="Arial" Background="Transparent" BorderBrush="Transparent" Width="252" />
+
+        <Image x:Name="sun" Source="sun.png" HorizontalAlignment="Left" Height="80" Margin="220,450,0,0" VerticalAlignment="Top" Width="80" Opacity="0" />
+        <Image x:Name="rain" Source="dojdi.png" HorizontalAlignment="Left" Height="80" Margin="220,450,0,0" VerticalAlignment="Top" Width="80" Opacity="0" />
+        <Image x:Name="groza" Source="groza.png" HorizontalAlignment="Left" Height="80" Margin="220,450,0,0" VerticalAlignment="Top" Width="80" Opacity="0" />
+        <Image x:Name="snow" Source="sneg.png" HorizontalAlignment="Left" Height="80" Margin="220,450,0,0" VerticalAlignment="Top" Width="80" Opacity="0" />
+        <Image x:Name="oblach" Source="oblachno.png" HorizontalAlignment="Left" Height="80" Margin="220,450,0,0" VerticalAlignment="Top" Width="80" Opacity="0" />
+
+
+
+
+        <Image HorizontalAlignment="Left" Height="35" Margin="638,464,0,0" VerticalAlignment="Top" Width="35" Source="veter.png"/>
+
+
+        <Image HorizontalAlignment="Left" Height="35" Margin="638,529,0,0" VerticalAlignment="Top" Width="35" Source="dav.png"/>
+        <Button Margin="995,2.5,0,0" VerticalAlignment="Top" Width="30" Height="30" Background="Transparent" BorderBrush="Transparent" Click="close_click" x:Name="close">
+            <Image Source="clode.png"/>
+        </Button>
+
+        <Button Margin="885,2.5,0,0" VerticalAlignment="Top" Width="30" Height="30" Background="Transparent" BorderBrush="Transparent" Click="minus_click" x:Name="minus">
+            <Image Source="min.png"/>
+        </Button>
+        <TextBox Text="4km/h" TextWrapping="Wrap" Background="Transparent" Foreground="White" x:Name="Wwind" Opacity="0.6" FontSize="20"  BorderBrush="Transparent" Margin="678,464,226,101"/>
+        <TextBox Text="1080" TextWrapping="Wrap" Background="Transparent" Foreground="White" x:Name="Ppressure" Opacity="0.6" FontSize="20"  BorderBrush="Transparent" Margin="678,530,246,35"/>
+        <TextBox Text="Sun" TextWrapping="Wrap" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="Transparent" Foreground="White" x:Name="Condition" Opacity="0.6" FontSize="20"  BorderBrush="Transparent" Margin="211,515,741,50"/>
+        <TextBox Text="20°" x:Name="Temp" TextWrapping="Wrap" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" FontSize="90" Background="Transparent" Foreground="White" Opacity="0.6"  BorderBrush="Transparent" Margin="33,437,830,28"/>
+        <TextBox Text="13:04" TextWrapping="Wrap" Background="Transparent" Foreground="White" x:Name="Time" Opacity="0.7" FontSize="40"  BorderBrush="Transparent" Margin="22,105,788,428" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        <TextBox Text="02/12/2022" TextWrapping="Wrap" Background="Transparent" Foreground="White" x:Name="Date" Opacity="0.7" FontSize="40"  BorderBrush="Transparent" Margin="22,155,788,378" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        <Rectangle Fill="Transparent" HorizontalAlignment="Left" Height="125" Margin="22,111,0,0" Stroke="White" VerticalAlignment="Top" Width="252" />
+
+    </Grid>
+</Window>
